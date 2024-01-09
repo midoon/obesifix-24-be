@@ -1,0 +1,251 @@
+openapi: "3.0.2"
+info:
+  title: OBESIFIX 2024 BACK-END
+  description: Api specification for obesifix back-end. this endpoint consume from front-end
+  version: "2.0"
+servers:
+  - url: http://localhost:3000
+paths:
+  /register/authjwt:
+    post:
+      tags:
+        - "Auth API"
+      summary: Register new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                age:
+                  type: integer
+                gender:
+                  type: string
+                height:
+                  type: number
+                  multipleOf: 0.01
+                weight:
+                  type: number
+                  multipleOf: 0.01
+                activity:
+                  type: string
+                food_type:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "201":
+          description: Success register new user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterResponse"
+  /register/google:
+    post:
+      tags:
+        - "Auth API"
+      summary: Register new user from google account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                age:
+                  type: integer
+                gender:
+                  type: string
+                height:
+                  type: number
+                  multipleOf: 0.01
+                weight:
+                  type: number
+                  multipleOf: 0.01
+                activity:
+                  type: string
+                food_type:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        "201":
+          description: Success register new user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterResponse"
+  /login/authjwt:
+    post:
+      tags:
+        - "Auth API"
+      summary: Login user using email and password
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Success login user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+  /login/google:
+    post:
+      tags:
+        - "Auth API"
+      summary: Login user using google account
+      responses:
+        "200":
+          description: "Success login user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+  /user/{userId}:
+    get:
+      tags:
+        - "User API"
+      summary: Get user data by user ID
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Success get data user"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      user_id:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      picture:
+                        type: string
+                      age:
+                        type: number
+                      gender:
+                        type: string
+                      height:
+                        type: number
+                      weight:
+                        type: number
+                      activity:
+                        type: string
+                      food_type:
+                        type: array
+                        items:
+                          type: string
+                      created_at:
+                        type: string
+                      update_at:
+                        type: string
+    put:
+      tags:
+        - "User API"
+      summary: Update user data by user ID
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                age:
+                  type: number
+                height:
+                  type: number
+                weight:
+                  type: number
+                activity:
+                  type: string
+                food_type:
+                  type: string
+      responses:
+        "200":
+          description: "Success update user"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+components:
+  securitySchemes:
+    UserAuth:
+      type: apiKey
+      in: header
+      name: X-API-TOKEN
+      description: Authentication for user request
+  schemas:
+    LoginResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+        statusCode:
+          type: number
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            userId:
+              type: string
+            accessToken:
+              type: string
+            refreshToken:
+              type: string
+    RegisterResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+        statusCode:
+          type: number
+        message:
+          type: string
+        userId:
+          type: string
