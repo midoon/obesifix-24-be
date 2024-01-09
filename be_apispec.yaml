@@ -128,7 +128,7 @@ paths:
             type: string
       responses:
         "200":
-          description: "Success get data user"
+          description: Success get data user
           content:
             application/json:
               schema:
@@ -200,7 +200,7 @@ paths:
                   type: string
       responses:
         "200":
-          description: "Success update user"
+          description: Success update user
           content:
             application/json:
               schema:
@@ -212,6 +212,93 @@ paths:
                     type: number
                   message:
                     type: string
+  /prediction:
+    post:
+      tags:
+        - "ML API"
+      summary: Do prediction from user food image
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                image:
+                  type: string
+      responses:
+        "200":
+          description: Success do nutrition food prediction
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  food_data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      serving:
+                        type: number
+                      calorie:
+                        type: number
+                      fat:
+                        type: number
+                      protein:
+                        type: number
+                      carbohydrate:
+                        type: number
+                      description:
+                        type: string
+  /recomendation/{userId}:
+    get:
+      tags:
+        - "ML API"
+      summary: Get user food recomendation
+      parameters:
+        - name: userId
+          in: path
+          description: user id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success get list of food recomendation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  food_list:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        image:
+                          type: string
+                        calorie:
+                          type: number
+                        fat:
+                          type: number
+                        protein:
+                          type: number
+                        carbohydrate:
+                          type: number
+                        keywoard:
+                          type: string
+                        food_category:
+                          type: string
+
 components:
   securitySchemes:
     UserAuth:
