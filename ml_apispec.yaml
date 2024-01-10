@@ -1,0 +1,161 @@
+openapi: "3.0.2"
+info:
+  title: OBESIFIX 2024 BACK-END
+  description: Api specification for obesifix machine learning. this endpoint consume from back-end
+  version: "2.0"
+servers:
+  - url: http://localhost:3000
+paths:
+  /prediction:
+    post:
+      tags:
+        - "ML API"
+      summary: For classify user food image
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:
+                  type: string
+      responses:
+        "200":
+          description: "Success classify image"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food_data:
+                    type: object
+                    properties:
+                      description:
+                        type: string
+                      name:
+                        type: string
+                      serving:
+                        type: number
+                      total_cal:
+                        type: number
+                      total_carb:
+                        type: number
+                      total_fat:
+                        type: number
+                      total_protein:
+                        type: number
+  /recomendation:
+    post:
+      tags:
+        - "ML API"
+      summary: For classify user food image
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nutrition_status:
+                  type: string
+                food_type:
+                  type: string
+
+      responses:
+        "200":
+          description: "Success classify image"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  food_list:
+                    type: object
+                    properties:
+                      Calories:
+                        type: object
+                        properties:
+                          0:
+                            type: number
+                          1:
+                            type: number
+                          23:
+                            type: number
+                          24:
+                            type: number
+                      CarbohydrateContent:
+                        type: object
+                        properties:
+                          0:
+                            type: number
+                          1:
+                            type: number
+                          23:
+                            type: number
+                          24:
+                            type: number
+                      FatContent:
+                        type: object
+                        properties:
+                          0:
+                            type: number
+                          1:
+                            type: number
+                          23:
+                            type: number
+                          24:
+                            type: number
+                      FoodCategory:
+                        type: object
+                        properties:
+                          0:
+                            type: number
+                          1:
+                            type: number
+                          23:
+                            type: number
+                          24:
+                            type: number
+                      Images:
+                        type: object
+                        properties:
+                          0:
+                            type: string
+                          1:
+                            type: string
+                          23:
+                            type: string
+                          24:
+                            type: string
+                      Keywords:
+                        type: object
+                        properties:
+                          0:
+                            type: string
+                          1:
+                            type: string
+                          23:
+                            type: string
+                          24:
+                            type: string
+                      Name:
+                        type: object
+                        properties:
+                          0:
+                            type: string
+                          1:
+                            type: string
+                          23:
+                            type: string
+                          24:
+                            type: string
+                      ProteinContent:
+                        type: object
+                        properties:
+                          0:
+                            type: number
+                          1:
+                            type: number
+                          23:
+                            type: number
+                          24:
+                            type: number
