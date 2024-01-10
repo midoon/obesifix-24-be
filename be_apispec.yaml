@@ -48,6 +48,9 @@ paths:
                 $ref: "#/components/schemas/RegisterResponse"
   /register/google:
     post:
+      security:
+        - UserGoogleAuth: []
+
       tags:
         - "Auth API"
       summary: Register new user from google account
@@ -104,6 +107,8 @@ paths:
                 $ref: "#/components/schemas/LoginResponse"
   /login/google:
     post:
+      security:
+        - UserGoogleAuth: []
       tags:
         - "Auth API"
       summary: Login user using google account
@@ -116,6 +121,8 @@ paths:
                 $ref: "#/components/schemas/LoginResponse"
   /user/{userId}:
     get:
+      security:
+        - UserAuth: []
       tags:
         - "User API"
       summary: Get user data by user ID
@@ -170,6 +177,8 @@ paths:
                       update_at:
                         type: string
     put:
+      security:
+        - UserAuth: []
       tags:
         - "User API"
       summary: Update user data by user ID
@@ -214,6 +223,8 @@ paths:
                     type: string
   /prediction:
     post:
+      security:
+        - UserAuth: []
       tags:
         - "ML API"
       summary: Do prediction from user food image
@@ -255,6 +266,8 @@ paths:
                         type: string
   /recomendation/{userId}:
     get:
+      security:
+        - UserAuth: []
       tags:
         - "ML API"
       summary: Get user food recomendation
@@ -306,6 +319,11 @@ components:
       in: header
       name: X-API-TOKEN
       description: Authentication for user request
+    UserGoogleAuth:
+      type: apiKey
+      in: header
+      name: X-GOOGLE-API-KEY
+      description: Authentication token from google account
   schemas:
     LoginResponse:
       type: object
