@@ -2,6 +2,7 @@ import {} from "dotenv/config";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import healthRouter from "./route/health_route.js";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -11,6 +12,8 @@ const corsConfig = {
   origin: true,
 };
 app.use(cors(corsConfig));
+
+app.use(healthRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
