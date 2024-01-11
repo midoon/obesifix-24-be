@@ -9,3 +9,30 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+enum Gender {
+  male
+  female
+}
+
+enum Activity {
+  sedentary
+  lowActive
+  active
+  veryActive
+}
+
+model User {
+  user_id String @id @db.VarChar(255)
+  name String  @db.VarChar(255)
+  email String  @db.VarChar(255)
+  picture String @db.Text
+  age Int @db.Int
+  gender Gender
+  height Float @db.Float
+  weight Float @db.Float
+  activity Activity
+  food_type String? @db.LongText
+  created_at DateTime  @db.Timestamp(3)
+  updated_at DateTime @db.Timestamp(3)
+}
