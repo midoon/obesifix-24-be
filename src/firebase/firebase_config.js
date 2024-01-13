@@ -1,7 +1,10 @@
 import {} from "dotenv/config";
 import admin from "firebase-admin";
+import { readFile } from "fs/promises";
 
-import serviceAccount from "./obesifix-skripsi-24-firebase-adminsdk-48m37-4b737a98fb.json" assert { type: "json" };
+const serviceAccount = JSON.parse(
+  await readFile(new URL(process.env.URL_FIREBASE_SA, import.meta.url))
+);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
