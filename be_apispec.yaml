@@ -46,43 +46,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RegisterResponse"
-  /register/google:
-    post:
-      security:
-        - UserGoogleAuth: []
-
-      tags:
-        - "Auth API"
-      summary: Register new user from google account
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                age:
-                  type: integer
-                gender:
-                  type: string
-                height:
-                  type: number
-                  multipleOf: 0.01
-                weight:
-                  type: number
-                  multipleOf: 0.01
-                activity:
-                  type: string
-                food_type:
-                  type: array
-                  items:
-                    type: string
-      responses:
-        "201":
-          description: Success register new user
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RegisterResponse"
   /login/authjwt:
     post:
       tags:
@@ -119,6 +82,27 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginResponse"
+  /logout:
+    delete:
+      security:
+        - UserAuth: []
+      tags:
+        - "Auth API"
+      summary: delete user session
+      responses:
+        "200":
+          description: Success logout user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
   /user/{userId}:
     get:
       security:
@@ -221,6 +205,7 @@ paths:
                     type: number
                   message:
                     type: string
+
   /prediction:
     post:
       security:
