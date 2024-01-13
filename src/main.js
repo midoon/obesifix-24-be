@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import healthRouter from "./route/health_route.js";
+import userRouter from "./route/user_route.js";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,6 +15,7 @@ const corsConfig = {
 app.use(cors(corsConfig));
 
 app.use(healthRouter);
+app.use(userRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

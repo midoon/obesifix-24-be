@@ -6,7 +6,7 @@ info:
 servers:
   - url: http://localhost:3000
 paths:
-  /register/authjwt:
+  /register:
     post:
       tags:
         - "Auth API"
@@ -17,7 +17,7 @@ paths:
             schema:
               type: object
               properties:
-                username:
+                name:
                   type: string
                 email:
                   type: string
@@ -36,9 +36,8 @@ paths:
                 activity:
                   type: string
                 food_type:
-                  type: array
-                  items:
-                    type: string
+                  type: string
+
       responses:
         "201":
           description: Success register new user
@@ -336,6 +335,4 @@ components:
         statusCode:
           type: number
         message:
-          type: string
-        userId:
           type: string

@@ -4,12 +4,13 @@ const registerUserValidation = (payload) => {
   const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().required(),
+    password: Joi.string().required(),
     age: Joi.number().required(),
     gender: Joi.string().required(),
     height: Joi.number().required(),
     weight: Joi.number().required(),
     activity: Joi.string().required(),
-    food_type: Joi.array().allow(null),
+    food_type: Joi.string().required(),
   });
 
   return schema.validate(payload);
