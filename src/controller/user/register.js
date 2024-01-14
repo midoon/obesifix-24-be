@@ -5,6 +5,7 @@ import {
   isEmailExist,
   storeDataRegisterUser,
 } from "../../service/auth_service.js";
+import { encode } from "../../util/hash.js";
 
 const register = async (req, res) => {
   try {
@@ -13,6 +14,7 @@ const register = async (req, res) => {
     const userData = value;
 
     userData.user_id = v4().toString();
+    userData.password = await encode(userData.password, 10);
     userData.created_at = new Date();
     userData.updated_at = new Date();
     if (!userData.image) {
@@ -22,7 +24,6 @@ const register = async (req, res) => {
     if (existEmail !== 0) throw new Error("User already exist");
 
     await storeDataRegisterUser(userData);
-    console.log(userData);
 
     return res.status(201).send({
       status: true,

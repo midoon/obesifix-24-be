@@ -16,4 +16,42 @@ const storeDataRegisterUser = async (userData) => {
   });
 };
 
-export { isEmailExist, storeDataRegisterUser };
+const isUserExistInTokenTable = async (user_id) => {
+  const user = await prismaClient.token.count({
+    where: {
+      user_id: user_id,
+    },
+  });
+  return user;
+};
+
+const deleteTokenByUserId = async (user_id) => {
+  return await prismaClient.token.delete({
+    where: {
+      user_id: user_id,
+    },
+  });
+};
+
+const storeDataToken = async (payload) => {
+  return await prismaClient.token.create({
+    data: payload,
+  });
+};
+const findUserByEmail = async (email) => {
+  const user = await prismaClient.user.findFirst({
+    where: {
+      email: email,
+    },
+  });
+
+  return user;
+};
+export {
+  isEmailExist,
+  storeDataRegisterUser,
+  isUserExistInTokenTable,
+  deleteTokenByUserId,
+  storeDataToken,
+  findUserByEmail,
+};

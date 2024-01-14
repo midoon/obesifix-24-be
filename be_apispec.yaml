@@ -81,6 +81,41 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginResponse"
+  /refresh:
+    post:
+      tags:
+        - "Auth API"
+      summary: To renew an expired access token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        "200":
+          description: success refresh token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  statusCode:
+                    type: number
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      userId:
+                        type: string
+                      accessToken:
+                        type: string
+
   /logout:
     delete:
       security:
@@ -302,12 +337,12 @@ components:
       type: apiKey
       in: header
       name: X-API-TOKEN
-      description: Authentication for user request
+      description: "Enter the token with the `Bearer: ` prefix, e.g. Bearer abcde12345"
     UserGoogleAuth:
       type: apiKey
       in: header
       name: X-GOOGLE-API-KEY
-      description: Authentication token from google account
+      description: Enter the token you got from firebase while doing auth with google
   schemas:
     LoginResponse:
       type: object

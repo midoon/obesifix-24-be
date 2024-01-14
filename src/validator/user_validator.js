@@ -3,7 +3,7 @@ import Joi from "joi";
 const registerUserValidation = (payload) => {
   const schema = Joi.object({
     name: Joi.string().required(),
-    email: Joi.string().required(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
     age: Joi.number().required(),
     gender: Joi.string().required(),
@@ -11,6 +11,15 @@ const registerUserValidation = (payload) => {
     weight: Joi.number().required(),
     activity: Joi.string().required(),
     food_type: Joi.string().required(),
+  });
+
+  return schema.validate(payload);
+};
+
+const loginUserValidation = (payload) => {
+  const schema = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
   });
 
   return schema.validate(payload);
@@ -29,4 +38,4 @@ const updateUserValidation = (payload) => {
   return schema.validate(payload);
 };
 
-export { registerUserValidation, updateUserValidation };
+export { registerUserValidation, updateUserValidation, loginUserValidation };
