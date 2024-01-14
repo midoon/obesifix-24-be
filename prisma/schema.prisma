@@ -25,7 +25,7 @@ enum Activity {
 model User {
   user_id String @id @db.VarChar(255)
   name String  @db.VarChar(255)
-  email String  @db.VarChar(255)
+  email String  @db.VarChar(255) @unique
   password String  @db.VarChar(255)
   picture String @db.Text
   age Int @db.Int
