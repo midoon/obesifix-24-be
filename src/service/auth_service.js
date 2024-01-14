@@ -58,6 +58,16 @@ const findUserByUserId = async (userId) => {
 
   return user;
 };
+
+const updateUserById = async (userId, payload) => {
+  return await prismaClient.user.update({
+    where: {
+      user_id: userId,
+    },
+    data: payload,
+  });
+};
+
 export {
   isEmailExist,
   storeDataRegisterUser,
@@ -66,4 +76,5 @@ export {
   storeDataToken,
   findUserByEmail,
   findUserByUserId,
+  updateUserById,
 };
