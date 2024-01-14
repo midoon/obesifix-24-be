@@ -15,6 +15,7 @@ const authMiddelware = async (req, res, next) => {
     if (!decodedValue.valid) throw new Error("Invalid token");
     if (decodedValue.expired) throw new Error("Token expired");
     req.user = decodedValue.decoded.payload;
+    // mengecek apakah sudah login atau belum
     const countUser = await isUserExistInTokenTable(req.user.user_id);
     if (countUser !== 1) throw new Error("Unauthorized");
     return next();

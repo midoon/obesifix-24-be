@@ -38,10 +38,21 @@ const storeDataToken = async (payload) => {
     data: payload,
   });
 };
+
 const findUserByEmail = async (email) => {
   const user = await prismaClient.user.findFirst({
     where: {
       email: email,
+    },
+  });
+
+  return user;
+};
+
+const findUserByUserId = async (userId) => {
+  const user = await prismaClient.user.findFirst({
+    where: {
+      user_id: userId,
     },
   });
 
@@ -54,4 +65,5 @@ export {
   deleteTokenByUserId,
   storeDataToken,
   findUserByEmail,
+  findUserByUserId,
 };

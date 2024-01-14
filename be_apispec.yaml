@@ -187,9 +187,7 @@ paths:
                       activity:
                         type: string
                       food_type:
-                        type: array
-                        items:
-                          type: string
+                        type: string
                       created_at:
                         type: string
                       update_at:
