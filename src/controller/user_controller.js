@@ -1,4 +1,4 @@
 import register from "./user/register.js";
 import login from "./user/loginJwt.js";
-
-export { register, login };
+import loginWithGoogle from "./user/loginGoogle.js";
+export { register, login, loginWithGoogle };
