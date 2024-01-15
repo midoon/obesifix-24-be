@@ -4,6 +4,7 @@ import {
   getUser,
   login,
   loginWithGoogle,
+  logout,
   refresfhToken,
   register,
   updateUser,
@@ -17,4 +18,5 @@ userRouter.post("/login/authjwt", login);
 userRouter.post("/login/google", decodeTokenFirebase, loginWithGoogle);
 userRouter.get("/user/:userId", authMiddelware, getUser);
 userRouter.put("/user/:userId", authMiddelware, updateUser);
+userRouter.delete("/logout", authMiddelware, logout);
 export default userRouter;
