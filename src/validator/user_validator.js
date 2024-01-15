@@ -38,4 +38,17 @@ const updateUserValidation = (payload) => {
   return schema.validate(payload);
 };
 
-export { registerUserValidation, updateUserValidation, loginUserValidation };
+const refreshTokenValidation = (payload) => {
+  const schema = Joi.object({
+    refresh_token: Joi.string().required(),
+  });
+
+  return schema.validate(payload);
+};
+
+export {
+  registerUserValidation,
+  updateUserValidation,
+  loginUserValidation,
+  refreshTokenValidation,
+};
