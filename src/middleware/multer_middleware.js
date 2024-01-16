@@ -1,7 +1,7 @@
 import multer from "multer";
 
 const storage = multer.memoryStorage();
-const filterFile = (req, file, cb) => {
+const fileFilter = (req, file, cb) => {
   if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
     const error = new Error("Format file tidak valid");
     error.code = "UNSUPPORTED_MEDIA_TYPE";
@@ -11,5 +11,4 @@ const filterFile = (req, file, cb) => {
 };
 
 const upload = multer({ storage: storage, fileFilter: fileFilter });
-
 export default upload;

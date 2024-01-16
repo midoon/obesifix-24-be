@@ -21,6 +21,7 @@
     "prisma": "^5.8.0"
   },
   "dependencies": {
+    "@google-cloud/storage": "^7.7.0",
     "@prisma/client": "^5.8.0",
     "axios": "^1.6.5",
     "bcrypt": "^5.1.1",
