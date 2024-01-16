@@ -47,7 +47,11 @@ const recomendationFood = async (req, res) => {
     const recomendationFoodList = recomendationResponse.data.food_list;
 
     const responseData = dictionaryToArray(recomendationFoodList);
-    return res.send(responseData);
+    return res.status(200).send({
+      status: true,
+      statusCode: 200,
+      food_list: responseData,
+    });
   } catch (error) {
     return res.send({
       status: false,
